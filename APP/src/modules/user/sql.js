@@ -37,10 +37,12 @@ const USERS = `
     select 
         user_id,
         user_name,
+        user_password,
         user_avatar,
         user_created_at
     from users
 `
+
 const ADD_USER = `
     insert into users (user_name, user_password, user_avatar) values ($1, $2, $3) returning *
 `

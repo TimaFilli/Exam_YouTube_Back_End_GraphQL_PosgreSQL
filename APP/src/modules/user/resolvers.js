@@ -10,28 +10,29 @@ import fs from 'fs'
 
 export default {
     Mutation: {
-        login: (_, { username, password }, { model, userIp, agent }) => {
-            username = username.trim()
-            password = password.trim()
+        login: async (_, { user_name, user_password }, { __, userIp, agent }) => {
+            user_name = user_name.trim()
+            user_password = user_password.trim()
 
-            const user = model
-                .read('users')
-                .find(user => user.username == username && user.password == sha256(password))
+            let users = await model.USERS()
+            let user = users.find(user => user.user_name == user_name && user.user_password == sha256(user_password))
 
-            if (user) {
-                return {
-                    status: 200,
-                    message: "The user successfully logged in!",
-                    data: user,
-                    token: JWT.sign({
-                        user_id: user.user_id,
-                        userIp,
-                        agent,
-                    })
-                }
+            if (!user) throw new Error("Invalid user_name or user_password!")
+
+            const token = JWT.sign({
+                user_id: user.user_id,
+                userIp,
+                agent,
+            })
+
+            delete user.user_password
+
+            return {
+                status: 200,
+                message: "The user successfully logged in!",
+                data: user,
+                token
             }
-
-            throw new Error("Invalid username or password!")
         },
 
         register: async (_, { user_avatar, user_name, user_password }, { __, agent, userIp }) => {
@@ -46,20 +47,27 @@ export default {
 
             if (user) throw new Error("The user already exists!")
 
-            // const out = fs.createWriteStream(path.join(process.cwd(), 'uploads', user_avatar))
-            // createReadStream().pipe(out)
-            // await finished(out)
+            const out = fs.createWriteStream(path.join(process.cwd(), 'uploads', user_avatar))
+            createReadStream().pipe(out)
+            await finished(out)
 
-            // model.addUser(username, sha256(password), user_avatar)
+            model.addUser(user_name, sha256(user_password), user_avatar)
 
             let newUser = await model.USERS()
             newUser = newUser.find(user => user.user_name == user_name)
+            
             let token = JWT.sign({
                 user_id: newUser.user_id,
                 userIp,
                 agent,
             })
+
             console.log(newUser);
+            
+            delete newUser.user_password
+
+            console.log(newUser);
+
             return {
                 status: 200,
                 message: "The user successfully registered!",
