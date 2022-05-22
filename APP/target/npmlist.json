@@ -1,0 +1,42 @@
+{
+    "version": "1.0.0",
+    "name": "dars-53",
+    "dependencies": {
+        "@graphql-tools/schema": {
+            "version": "8.3.13"
+        },
+        "apollo-server-core": {
+            "version": "3.7.0"
+        },
+        "apollo-server-express": {
+            "version": "3.7.0"
+        },
+        "cors": {
+            "version": "2.8.5"
+        },
+        "dotenv": {
+            "version": "16.0.1"
+        },
+        "express": {
+            "version": "4.18.1"
+        },
+        "graphql-upload": {
+            "version": "13.0.0"
+        },
+        "graphql": {
+            "version": "16.5.0"
+        },
+        "jsonwebtoken": {
+            "version": "8.5.1"
+        },
+        "pg": {
+            "version": "8.7.3"
+        },
+        "sha256": {
+            "version": "0.2.0"
+        },
+        "stream": {
+            "version": "0.0.2"
+        }
+    }
+}
