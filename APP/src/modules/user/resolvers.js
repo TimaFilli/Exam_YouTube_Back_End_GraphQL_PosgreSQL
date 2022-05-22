@@ -1,4 +1,3 @@
-import { UserInputError } from 'apollo-server-express'
 import { USER_CONFIG } from '#config/index'
 import { finished } from 'stream/promises'
 import model from './model.js'
@@ -55,18 +54,14 @@ export default {
 
             let newUser = await model.USERS()
             newUser = newUser.find(user => user.user_name == user_name)
-            
+
             let token = JWT.sign({
                 user_id: newUser.user_id,
                 userIp,
                 agent,
             })
 
-            console.log(newUser);
-            
             delete newUser.user_password
-
-            console.log(newUser);
 
             return {
                 status: 200,
