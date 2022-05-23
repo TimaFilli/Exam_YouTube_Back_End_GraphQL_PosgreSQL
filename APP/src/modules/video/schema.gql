@@ -10,9 +10,9 @@ type Query {
 type Mutation {
     addVideo(video_name: String! video_file: Upload!): Response!
     
-    updateVideo( video_id: String! video_name: String! ): Response!
+    updateVideo( video_id: ID! video_name: String! ): Response!
 
-    deleteVideo( video_id: String! ): Response!
+    deleteVideo( video_id: ID! ): Response!
 }
 
 type Video {

@@ -58,9 +58,19 @@ const ADD_VIDEO = `
     insert into videos (user_id, video_name, video_link, video_type, video_date, video_size) values ($1, $2, $3, $4, $5, $6) returning *
 `
 
+const UPDATE_VIDEO = `
+    update videos set video_name = $1 where video_id = $2 and user_id = $3 returning *
+`
+
+const DELETE_VIDEO = `
+    update videos set video_deleted_at = $1 where video_id = $2 and user_id = $3 returning *
+`
+
 export default {
     GET_VIDEOS,
     GET_VIDEO,
     ADD_VIDEO,
+    DELETE_VIDEO,
+    UPDATE_VIDEO,
     VIDEOS
 }

@@ -3,6 +3,7 @@ import { finished } from 'stream/promises'
 import model from './model.js'
 import path from 'path'
 import fs from 'fs'
+import { DangerousChangeType } from 'graphql'
 
 
 export default {
@@ -33,15 +34,23 @@ export default {
             }
         },
 
-        updateVideo: async (_, { video_id, video_name }, { __, userIp, agent }) => {
-            console.log("UPDATE VIDEO");
-            console.log(video_id);
-            console.log(video_name);
+        updateVideo: async (_, { video_id, video_name }, { __, userIp, agent, user_id }) => {
+            const updatedVideo = await model.updateVideo(video_name, video_id, user_id)
+            return {
+                status: 200,
+                message: "The video successfully updated!",
+                data: updatedVideo
+            }
         },
 
-        deleteVideo: async (_, { video_id }, { __, agent, userIp }) => {
-            console.log("DELETE VIDEO");
-            console.log(video_id);
+        deleteVideo: async (_, { video_id }, { __, agent, userIp, user_id }) => {
+            let video_deleted_at = new Date()
+            const deletedVideo = await model.deleteVideo(video_deleted_at, video_id, user_id)
+            return {
+                status: 200,
+                message: "The video successfully deleted!",
+                data: deletedVideo
+            }       
         },
     },
 
