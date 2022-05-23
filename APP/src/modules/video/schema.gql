@@ -7,21 +7,19 @@ type Query {
     video(user_id: ID!): Video
 }
 
-# type Mutation {
-#     login(user_name: String! user_password: String!): AuthResponse!
+type Mutation {
+    addVideo(video_name: String! video_file: Upload!): Response!
     
-#     register(
-#         user_avatar: Upload!
-#         user_name: String!
-#         user_password: String!
-#     ): AuthResponse!
-# }
+    updateVideo( video_id: Upload! video_name: String! ): Response!
+
+    deleteVideo( video_id: Upload! ): Response!
+}
 
 type Video {
     user_id: ID!
     video_id: ID!
     video_name: String!
-    video_link: Link!
+    video_link: String!
     video_date: String!
     video_size: String!
 }

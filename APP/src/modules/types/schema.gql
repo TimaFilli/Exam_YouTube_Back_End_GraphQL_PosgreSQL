@@ -20,7 +20,7 @@ enum SortOptions {
     toSmallest
 }
 
-union MainType = User
+union MainType = User | Video
 
 type AuthResponse {
     status: Int!

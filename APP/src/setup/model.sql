@@ -34,7 +34,10 @@ drop table if exists videos;
 create table videos (
     video_id uuid default uuid_generate_v4() primary key,
     user_id uuid not null references users(user_id),
-    video_link int default 1,
+    video_name text,
+    video_link text,
+    video_date text,
+    video_size text,
     video_created_at timestamptz default current_timestamp,
     video_deleted_at timestamptz default null 
 );

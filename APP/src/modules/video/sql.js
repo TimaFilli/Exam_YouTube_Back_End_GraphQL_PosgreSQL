@@ -1,55 +1,63 @@
-const GET_USERS = `
+const GET_VIDEOS = `
     select 
         user_id,
-        user_name,
-        user_avatar,
-        user_created_at
-    from users
+        video_id,
+        video_name,
+        video_link,
+        video_date,
+        video_size,
+        video_created_at
+    from videos
     where 
-        user_name ilike concat('%', $3::varchar, '%')
+        video_name ilike concat('%', $3::varchar, '%')
     order by
     case 
-        when $4 = 'byDate' and $5 = 1 then user_created_at
+        when $4 = 'byDate' and $5 = 1 then video_created_at
     end asc,
     case 
-        when $4 = 'byDate' and $5 = 2 then user_created_at
+        when $4 = 'byDate' and $5 = 2 then video_created_at
     end desc,
     case 
-        when $4 = 'byName' and $5 = 1 then user_name
+        when $4 = 'byName' and $5 = 1 then video_name
     end desc,
     case 
-        when $4 = 'byName' and $5 = 2 then user_name
+        when $4 = 'byName' and $5 = 2 then video_name
     end asc
     offset $1 limit $2
 `
 
-const GET_USER = `
+const GET_VIDEO = `
     select 
         user_id,
-        user_name,
-        user_avatar,
-        user_created_at
-    from users
-    where user_id::varchar = $1
+        video_id,
+        video_name,
+        video_link,
+        video_date,
+        video_size,
+        video_created_at
+    from videos
+    where video_id::varchar = $1
 `
 
-const USERS = `
+const VIDEOS = `
     select 
         user_id,
-        user_name,
-        user_password,
-        user_avatar,
-        user_created_at
-    from users
+        video_id,
+        video_name,
+        video_link,
+        video_date,
+        video_size,
+        video_created_at
+    from videos
 `
 
-const ADD_USER = `
-    insert into users (user_name, user_password, user_avatar) values ($1, $2, $3) returning *
+const ADD_VIDEO = `
+    insert into videos (user_id, video_name, video_link, video_date, video_size) values ($1, $2, $3, $4) returning *
 `
 
 export default {
-    // GET_USERS,
-    // GET_USER,
-    // ADD_USER,
-    // USERS
+    GET_VIDEOS,
+    GET_VIDEO,
+    ADD_VIDEO,
+    VIDEOS
 }
