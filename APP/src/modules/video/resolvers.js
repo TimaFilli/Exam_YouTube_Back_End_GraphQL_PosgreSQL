@@ -3,8 +3,6 @@ import { finished } from 'stream/promises'
 import model from './model.js'
 import path from 'path'
 import fs from 'fs'
-import { DangerousChangeType } from 'graphql'
-
 
 export default {
     Mutation: {
@@ -21,16 +19,12 @@ export default {
             const video_date = new Date()
             const video_size = out.bytesWritten / 1000 + ""
 
-            model.addVideo(user_id, video_name, video_file, mimetype, video_date, video_size)
-
-            let videos = await model.VIDEOS()
-            
-            let newVideo = videos.find(video => video.video_link == video_file)
+            let newVideo = await model.addVideo(user_id, video_name, video_file, mimetype, video_date, video_size)
 
             return {
                 status: 200,
                 message: "The video successfully added!",
-                data: newVideo
+                data: newVideo[0]
             }
         },
 
@@ -39,7 +33,7 @@ export default {
             return {
                 status: 200,
                 message: "The video successfully updated!",
-                data: updatedVideo
+                data: updatedVideo[0]
             }
         },
 
@@ -49,7 +43,7 @@ export default {
             return {
                 status: 200,
                 message: "The video successfully deleted!",
-                data: deletedVideo
+                data: deletedVideo[0]
             }
         },
     },

@@ -10,6 +10,7 @@ const GET_VIDEOS = `
         video_created_at
     from videos
     where 
+    video_deleted_at IS NULL and
         video_name ilike concat('%', $3::varchar, '%')
     order by
     case 
@@ -38,7 +39,7 @@ const GET_VIDEO = `
         video_size,
         video_created_at
     from videos
-    where video_id::varchar = $1
+    where video_id::varchar = $1 and video_deleted_at IS NULL
 `
 
 const VIDEOS = `
@@ -52,6 +53,7 @@ const VIDEOS = `
         video_size,
         video_created_at
     from videos
+        WHERE video_deleted_at IS NULL
 `
 
 const ADD_VIDEO = `
