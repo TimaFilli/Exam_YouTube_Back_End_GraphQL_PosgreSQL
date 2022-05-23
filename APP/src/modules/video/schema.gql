@@ -4,15 +4,15 @@ type Query {
         search: String
         sort: Sort
     ): [Video]
-    video(user_id: ID!): Video
+    video(video_id: ID!): Video
 }
 
 type Mutation {
     addVideo(video_name: String! video_file: Upload!): Response!
     
-    updateVideo( video_id: Upload! video_name: String! ): Response!
+    updateVideo( video_id: String! video_name: String! ): Response!
 
-    deleteVideo( video_id: Upload! ): Response!
+    deleteVideo( video_id: String! ): Response!
 }
 
 type Video {

@@ -36,7 +36,8 @@ import './config.js'
                 'register',
                 'users',
                 'user',
-                'videos'
+                'videos',
+                'video'
             ].includes(fieldName)) {
                 return {
                     agent: req.headers['user-agent'],
