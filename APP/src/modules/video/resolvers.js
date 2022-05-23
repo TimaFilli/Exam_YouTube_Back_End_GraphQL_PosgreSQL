@@ -50,7 +50,7 @@ export default {
                 status: 200,
                 message: "The video successfully deleted!",
                 data: deletedVideo
-            }       
+            }
         },
     },
 
