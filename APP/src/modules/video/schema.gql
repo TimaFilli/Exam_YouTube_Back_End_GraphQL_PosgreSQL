@@ -20,6 +20,7 @@ type Video {
     video_id: ID!
     video_name: String!
     video_link: String!
+    video_type: String!
     video_date: String!
     video_size: String!
 }

@@ -22,6 +22,7 @@ import './config.js'
     app.use(cors())
     app.use(graphqlUploadExpress())
     app.use(express.static(path.join(process.cwd(), 'uploads')))
+    app.use(express.static(path.join(process.cwd(), 'uploads', 'videos')))
 
     const server = new ApolloServer({
         schema,
@@ -61,7 +62,8 @@ import './config.js'
 
             return {
                 agent: req.headers['user-agent'],
-                userIp: req.ip
+                userIp: req.ip,
+                user_id
             }
         },
         plugins: [

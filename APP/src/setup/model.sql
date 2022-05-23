@@ -36,6 +36,7 @@ create table videos (
     user_id uuid not null references users(user_id),
     video_name text,
     video_link text,
+    video_type text,
     video_date text,
     video_size text,
     video_created_at timestamptz default current_timestamp,

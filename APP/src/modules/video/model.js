@@ -21,10 +21,11 @@ async function VIDEOS() {
     return await db(query.VIDEOS)
 }
 
-async function addVideo(video_name, video_file) {
-    const video = await db(query.ADD_VIDEO, video_name, video_file)
+async function addVideo(user_id, video_name, video_link, video_type, video_date, video_size) {
+    const video = await db(query.ADD_VIDEO, user_id, video_name, video_link, video_type, video_date, video_size)
     return video
 }
+
 
 export default {
     getVideos,

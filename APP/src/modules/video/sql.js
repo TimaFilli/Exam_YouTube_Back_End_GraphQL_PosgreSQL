@@ -3,6 +3,7 @@ const GET_VIDEOS = `
         user_id,
         video_id,
         video_name,
+        video_type,
         video_link,
         video_date,
         video_size,
@@ -31,6 +32,7 @@ const GET_VIDEO = `
         user_id,
         video_id,
         video_name,
+        video_type,
         video_link,
         video_date,
         video_size,
@@ -44,6 +46,7 @@ const VIDEOS = `
         user_id,
         video_id,
         video_name,
+        video_type,
         video_link,
         video_date,
         video_size,
@@ -52,7 +55,7 @@ const VIDEOS = `
 `
 
 const ADD_VIDEO = `
-    insert into videos (user_id, video_name, video_link, video_date, video_size) values ($1, $2, $3, $4) returning *
+    insert into videos (user_id, video_name, video_link, video_type, video_date, video_size) values ($1, $2, $3, $4, $5, $6) returning *
 `
 
 export default {
