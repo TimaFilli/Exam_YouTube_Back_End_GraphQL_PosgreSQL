@@ -88,11 +88,5 @@ export default {
         user: async (_, args) => {
             return await model.getUser(args)
         }
-    },
-
-    User: {
-        user_id: global => global.user_id,
-        user_name: global => global.user_name,
-        user_avatar: global => global.user_avatar
     }
 }
