@@ -1,0 +1,27 @@
+type Query {
+    videos(
+        pagination: Pagination = {}
+        search: String
+        sort: Sort
+    ): [Video]
+    video(user_id: ID!): Video
+}
+
+# type Mutation {
+#     login(user_name: String! user_password: String!): AuthResponse!
+    
+#     register(
+#         user_avatar: Upload!
+#         user_name: String!
+#         user_password: String!
+#     ): AuthResponse!
+# }
+
+type Video {
+    user_id: ID!
+    video_id: ID!
+    video_name: String!
+    video_link: Link!
+    video_date: String!
+    video_size: String!
+}
