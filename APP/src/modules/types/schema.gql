@@ -3,7 +3,6 @@ scalar Link
 scalar Token
 scalar Upload
 
-## pagination input
 input Pagination {
     page: Int
     limit: Int
@@ -14,7 +13,6 @@ input Sort {
     byName: SortOptions
 }
 
-## enum types
 enum SortOptions {
     toLargest
     toSmallest
